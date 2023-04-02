@@ -18,6 +18,15 @@ class RankingTable
         $this->results[$player]['score'] += $score;
         $this->results[$player]['played']++;
     }
+
+    public function playerRank()
+    {
+        uasort($this->results, function ($a, $b) {
+            if ($a['score'] != $b['score']) {
+                return $b['score'] - $a['score'];
+            }
+        });
+    }
 }
 
 $result = new RankingTable(array('Jan', 'Maks', 'Monika'));
