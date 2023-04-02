@@ -47,7 +47,7 @@ class RankingTable
 }
 
 $result = new RankingTable(array('Jan', 'Maks', 'Monika'));
-$table->recordResult('Jan', 2);
-$table->recordResult('Maks', 3);
-$table->recordResult('Monika', 5);
-echo $table->playerRank(1);
+$result->recordResult('Jan', 2);
+$result->recordResult('Maks', 3);
+$result->recordResult('Monika', 5);
+echo $result->playerRank(1);
