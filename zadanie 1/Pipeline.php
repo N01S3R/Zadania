@@ -15,3 +15,20 @@ class Pipeline
         return $result;
     }
 }
+
+$calculation = new Pipeline();
+$results = $calculation->make(
+    [
+        function ($var) {
+            return $var * 3;
+        },
+        function ($var) {
+            return $var + 1;
+        },
+        function ($var) {
+            return $var / 2;
+        }
+    ]
+);
+
+echo $results;
