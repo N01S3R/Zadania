@@ -26,13 +26,20 @@ class RankingTable
         $this->results[$player]['played']++;
     }
 
-    public function playerRank()
+    public function playerRank($rank)
     {
-        uasort($this->results, function ($a, $b) {
+        uasort($this->players, function ($a, $b) {
             if ($a['score'] != $b['score']) {
                 return $b['score'] - $a['score'];
+            } elseif ($a['gamesPlayed'] != $b['gamesPlayed']) {
+                return $a['gamesPlayed'] - $b['gamesPlayed'];
+            } else {
+                return strcmp(array_search($a, $this->players), array_search($b, $this->players));
             }
         });
+
+        $rankedPlayers = array_values($this->players);
+        return array_search($rankedPlayers[$rank - 1], $this->players);
     }
 }
 
