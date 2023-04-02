@@ -28,19 +28,26 @@ class RankingTable
 
     public function playerRank($rank)
     {
-        uasort($this->players, function ($a, $b) {
+        uasort($this->results, function ($a, $b) {
             if ($a['score'] != $b['score']) {
                 return $b['score'] - $a['score'];
-            } elseif ($a['gamesPlayed'] != $b['gamesPlayed']) {
-                return $a['gamesPlayed'] - $b['gamesPlayed'];
+            } elseif ($a['played'] != $b['played']) {
+                return $a['played'] - $b['played'];
             } else {
-                return strcmp(array_search($a, $this->players), array_search($b, $this->players));
+                return array_search(array_keys($this->results, $a)[0], $this->players)
+                    - array_search(array_keys($this->results, $b)[0], $this->players);
             }
         });
 
-        $rankedPlayers = array_values($this->players);
-        return array_search($rankedPlayers[$rank - 1], $this->players);
+        $players = array_keys($this->results);
+        $player = $players[$rank - 1];
+
+        return $player;
     }
 }
 
 $result = new RankingTable(array('Jan', 'Maks', 'Monika'));
+$table->recordResult('Jan', 2);
+$table->recordResult('Maks', 3);
+$table->recordResult('Monika', 5);
+echo $table->playerRank(1);
