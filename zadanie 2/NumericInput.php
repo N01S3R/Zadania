@@ -11,3 +11,8 @@ class NumericInput extends TextInput
         }
     }
 }
+
+$input = new NumericInput();
+$input->add('44242sadada');
+$input->add('444');
+echo $input->getValue();
