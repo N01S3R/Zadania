@@ -15,6 +15,13 @@ class RankingTable
 
     public function recordResult($player, $score)
     {
+        if (!isset($this->results[$player])) {
+            $this->results[$player] = [
+                'score' => 0,
+                'played' => 0,
+            ];
+        }
+
         $this->results[$player]['score'] += $score;
         $this->results[$player]['played']++;
     }
